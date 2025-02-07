@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { X } from 'lucide-react';
 
 interface SheetProps {
   open: boolean;
@@ -40,7 +41,7 @@ const Sheet: React.FC<SheetProps> = ({
           onClick={() => onOpenChange(false)} 
           className="absolute top-4 right-4 text-gray-600 dark:text-gray-300"
         >
-          ×
+          <X className="h-6 w-6" />
         </button>
         {children}
       </div>
@@ -48,13 +49,15 @@ const Sheet: React.FC<SheetProps> = ({
   );
 };
 
-const SheetTrigger = ({ children, onClick }: { 
-  children: React.ReactNode, 
-  onClick: () => void 
-}) => (
-  <button onClick={onClick}>
+interface SheetTriggerProps {
+  children: React.ReactNode;
+  onClick?: () => void;
+}
+
+const SheetTrigger: React.FC<SheetTriggerProps> = ({ children, onClick }) => (
+  <div onClick={onClick}>
     {children}
-  </button>
+  </div>
 );
 
 const SheetContent: React.FC<{ children: React.ReactNode }> = ({ children }) => (
